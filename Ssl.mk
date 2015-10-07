@@ -11,7 +11,7 @@ LOCAL_CFLAGS += $(target_c_flags)
 LOCAL_C_INCLUDES += $(target_c_includes)
 LOCAL_SHARED_LIBRARIES = $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl_static
+LOCAL_MODULE := libssl_openssl_static
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/Ssl.mk
 include $(LOCAL_PATH)/Ssl-config-target.mk
 include $(LOCAL_PATH)/android-config.mk
@@ -30,9 +30,9 @@ else
 LOCAL_SDK_VERSION := 9
 endif
 
-LOCAL_SHARED_LIBRARIES += libcrypto $(log_shared_libraries)
+LOCAL_SHARED_LIBRARIES += libcrypto_openssl $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl
+LOCAL_MODULE := libssl_openssl
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/Ssl.mk
 include $(LOCAL_PATH)/Ssl-config-target.mk
 include $(LOCAL_PATH)/android-config.mk
@@ -41,9 +41,9 @@ include $(BUILD_SHARED_LIBRARY)
 #######################################
 # host shared library
 include $(CLEAR_VARS)
-LOCAL_SHARED_LIBRARIES += libcrypto-host $(log_shared_libraries)
+LOCAL_SHARED_LIBRARIES += libcrypto-openssl-host $(log_shared_libraries)
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl-host
+LOCAL_MODULE := libssl-openssl-host
 LOCAL_MULTILIB := both
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/android-config.mk $(LOCAL_PATH)/Ssl.mk
 include $(LOCAL_PATH)/Ssl-config-host.mk
@@ -54,7 +54,7 @@ include $(BUILD_HOST_SHARED_LIBRARY)
 # ssltest
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := ssl/ssltest.c
-LOCAL_SHARED_LIBRARIES := libssl libcrypto $(log_shared_libraries)
+LOCAL_SHARED_LIBRARIES := libssl_openssl libcrypto_openssl $(log_shared_libraries)
 LOCAL_MODULE := ssltest
 LOCAL_MULTILIB := both
 LOCAL_MODULE_STEM_32 := ssltest
